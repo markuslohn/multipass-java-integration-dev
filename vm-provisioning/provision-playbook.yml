@@ -1,0 +1,24 @@
+- name: Provision VM
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+  vars_files:
+    - ../vm-init/vm-config.yaml
+
+  roles:
+    - common
+    - java
+    - role: maven
+      vars: 
+        mvn_download_url: https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+        mvn_user: '{{ vmuser }}'
+    - role: oc
+      vars: 
+        oc_user: '{{ vmuser }}'
+        oc_client_version: 4.13.14
+
+
+
+
+    

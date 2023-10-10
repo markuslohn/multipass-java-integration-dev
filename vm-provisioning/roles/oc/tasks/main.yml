@@ -1,0 +1,37 @@
+- stat:
+    path: "/opt/oc/oc"
+  register: oc_install_dir
+- name: set fact oc_installed
+  set_fact:
+    oc_installed: "{{ oc_install_dir.stat.exists }}"
+
+- block:
+    - name: Copy oc-{{ oc_client_version }}-linux.tar.gz to /tmp
+      copy: 
+        src: oc-{{ oc_client_version }}-linux.tar.gz 
+        dest: /tmp/oc-linux.tar.gz  
+        force: no 
+        owner: '{{ oc_user }}'
+    - name: Create folder /opt/oc
+      file: state=directory path=/opt/oc force=No mode=o+rx
+    - name: Extract OpenShift Linux Client distribution to /opt/oc
+      ansible.builtin.unarchive: 
+        src: /tmp/oc-linux.tar.gz 
+        remote_src: yes
+        dest: /opt/oc
+        mode: o+rx
+    - name: Remove file /tmp/oc-linux.tar.gz 
+      ansible.builtin.file:
+         path: /tmp/oc-linux.tar.gz 
+         state: absent
+    - name: Modifying PATH environment variable the bashrc files
+      ansible.builtin.lineinfile: 
+          path: /home/{{ oc_user }}/.bashrc 
+          line: "export PATH=/opt/oc:${PATH}"
+          regexp: 'export PATH=/opt/oc:\${PATH}'
+          insertafter: EOF
+          owner: '{{ oc_user }}'
+          state: present
+          create: yes
+  when: oc_installed == False
+

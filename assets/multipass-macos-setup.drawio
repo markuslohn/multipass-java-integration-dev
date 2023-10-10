@@ -1,0 +1,152 @@
+<mxfile host="Electron" modified="2023-10-10T13:04:31.125Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="IjD_hvtX9sdm9rnHzRUG" version="22.0.2" type="device">
+  <diagram name="Seite-1" id="scReffujndqgrca6Yjud">
+    <mxGraphModel dx="2276" dy="961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-35" value="MacOS with M2 Processor" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;align=left;verticalAlign=top;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="-100" y="160" width="1250" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-6" target="rRBHpUm-QMUoCf0vim4Z-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-13" value="creates" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rRBHpUm-QMUoCf0vim4Z-12" vertex="1" connectable="0">
+          <mxGeometry x="0.0053" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-6" target="rRBHpUm-QMUoCf0vim4Z-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-15" value="create and configure VM" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rRBHpUm-QMUoCf0vim4Z-14" vertex="1" connectable="0">
+          <mxGeometry x="0.08" relative="1" as="geometry">
+            <mxPoint x="-23" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-6" value="Ansible tasks running on host" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="265" width="210" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-1" value="Multipass Ubuntu VM" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="400" y="195" width="560" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-3" value="vm-config.yaml" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="300" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-5" value="Ansible task&lt;br&gt;*.yaml" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="360" width="100" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-2" target="rRBHpUm-QMUoCf0vim4Z-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-2" target="rRBHpUm-QMUoCf0vim4Z-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-2" value="cloud-init.yaml" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="306" y="240" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-16" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.613;entryY=0.74;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" parent="1" target="rRBHpUm-QMUoCf0vim4Z-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="355" y="360" as="sourcePoint" />
+            <mxPoint x="390" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-17" target="rRBHpUm-QMUoCf0vim4Z-27" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-17" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.shared_folder" parent="1" vertex="1">
+          <mxGeometry x="380" y="475" width="43" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-18" value="git" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="240" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-19" value="ansible" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="280" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-22" target="rRBHpUm-QMUoCf0vim4Z-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="533" />
+              <mxPoint x="240" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-29" value="Sharing" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rRBHpUm-QMUoCf0vim4Z-25" vertex="1" connectable="0">
+          <mxGeometry x="0.182" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-22" value="Ansible tasks designed for guest" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="475" width="210" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-23" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/folder.svg;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="500" width="47.45" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-24" value="Ansible task&lt;br&gt;*.yaml" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="510" width="100" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-26" target="rRBHpUm-QMUoCf0vim4Z-30" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="rRBHpUm-QMUoCf0vim4Z-26" target="rRBHpUm-QMUoCf0vim4Z-31" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-34" value="install and configure" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="rRBHpUm-QMUoCf0vim4Z-33" vertex="1" connectable="0">
+          <mxGeometry x="-0.1321" relative="1" as="geometry">
+            <mxPoint y="-39" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-26" value="Ansibe tasks running on guest" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+          <mxGeometry x="510" y="335" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-27" value="Ansible task&lt;br&gt;*.yaml" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="402.5" width="100" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-30" value="Maven" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="780" y="235" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-31" value="..." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="780" y="270" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-36" value="1" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=22;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="250" y="235" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-37" value="2" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=22;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="256" y="360" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-38" value="3" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=22;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="350" y="525" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rRBHpUm-QMUoCf0vim4Z-39" value="4" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=22;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="640" y="417.5" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-1" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/folder.svg;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="310" width="47.45" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-2" value="vm-provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-90" y="555" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-3" value="vm-init" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-90" y="360" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-6" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.shared_folder" parent="1" vertex="1">
+          <mxGeometry x="500" y="500" width="43" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-7" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.shared_folder" parent="1" vertex="1">
+          <mxGeometry x="658.5" y="500" width="43" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-8" value="Sourcecode" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="448.5" y="610" width="146" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-9" value="Maven-Repository $HOME/.m2" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="607" y="610" width="146" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="j7IPhgO90I3_xsATAeKX-8" target="j7IPhgO90I3_xsATAeKX-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j7IPhgO90I3_xsATAeKX-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="j7IPhgO90I3_xsATAeKX-9" target="j7IPhgO90I3_xsATAeKX-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,19 @@
+#cloud-config
+
+users:
+  - default
+  - name: vscdev
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDm7GAkoUVDKlFA2XsJD/JVr38RjYUrwp1vnAB8BoRqsl0u2TKE6OpMOg84MKtIyiQDJSUCkd6iYkpf5C7j+f/CYEr1hmuTcQ9azvB1spFP/l0Ro+ApU0fsDtB4PpFTVM6Tw/+83gbnb3GQi8voYNWzEmDfQSAyCFRGeqNW/XvgsqTptw7z3Jt/mmAa9ARAzhJPB8J2lf16YujlVu26SOO9b7EChAXY5Ag75Wfm63eP6dRJzllNGV7B6gF1Ya9q/IUFKLpD9/sa5ea43lVzqsKn88jG5IVeQwIFs2MCeRrbloQswQ8tScD9mmMW0fao/LVjhqe3n6NlMbOuapNqfcTWRqZyLotgGUaz7fNbIE8u9xCZFJq8blOjeWKvFwrNuOGLGWg5FCIAwB08jNsa931Vbd/RQHagnK62iP2n84WpmtZmqlSjdLtxQ/gytSesOMT8vJ5og/+oR8FYCcAzP3A4VxaIm51H1g5attwxdOtU4qeUlfF0w26CfGA4tmVQmo0= mlohn@Birgit-iPhone.fritz.box
+
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+packages:
+  - git
+  - ansible
+
+
+

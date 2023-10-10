@@ -1,0 +1,55 @@
+- stat:
+    path: "/opt/maven/bin/mvn"
+  register: mvn_install_dir
+- name: set fact mvn_installed
+  set_fact:
+    mvn_installed: "{{ mvn_install_dir.stat.exists }}"
+
+- block:
+    - name: Download Apache Maven
+      get_url:
+        url: '{{ mvn_download_url }}'
+        dest: /tmp/apache-maven-bin.tar.gz
+        force: true
+    - name: Create folder /opt/maven
+      file: state=directory path=/opt/maven force=No mode=o+rx
+    - name: Extract Maven distribution to /opt/maven
+      ansible.builtin.unarchive: 
+        src: /tmp/apache-maven-bin.tar.gz
+        remote_src: yes
+        dest: /opt/maven
+        mode: o+rx
+        extra_opts: [--strip-components=1]
+    - name: Remove file /tmp/apache-maven-bin.tar.gz
+      ansible.builtin.file:
+         path: /tmp/apache-maven-bin.tar.gz
+         state: absent
+    - name: Adding M2_HOME the bashrc files of user {{ mvn_user }}
+      ansible.builtin.lineinfile: 
+          path: /home/{{ mvn_user }}/.bashrc 
+          line: "export M2_HOME=/opt/maven"
+          insertafter: EOF
+          owner: '{{ mvn_user }}'
+          state: present
+          create: yes
+    - name: Modifying PATH environment variable the bashrc files
+      ansible.builtin.lineinfile: 
+          path: /home/{{ mvn_user }}/.bashrc 
+          line: "export PATH=${M2_HOME}/bin:${PATH}"
+          regexp: 'export PATH=\${M2_HOME}/bin:\${PATH}'
+          insertafter: EOF
+          owner: '{{ mvn_user }}'
+          state: present
+          create: yes
+
+# The following lines maybe needed, when not synching the host/.m2 with the guest/.m2 folder.
+#  
+#    - name: Create folder $HOME/.m2
+#      file: state=directory path=/home/{{ mvn_user }}/.m2 force=No owner={{ mvn_user }}
+
+#    - name: Copy settings-security.xml to $HOME/.m2, execute mvn --encrypt masterpassword
+#      copy: src=settings-security.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
+
+#    - name: Copy settings.xml to $HOME/.m2, configure Artifactory passwords manually
+#      copy: src=settings.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
+  when: mvn_installed == False

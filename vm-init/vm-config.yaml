@@ -1,0 +1,26 @@
+# The name of the resulting VM.
+vmname: multipass-rhb-integration-dev
+# This parameter controls whether an existing VM should be deleted in advance when the script to create a new VM is executed. 
+vmdeletebeforecreate: false
+# Number of CPUs used by the VM.
+vmcpus: 4
+# Memory used by the VM.
+vmmemory: 8G
+# Disk spaced reserved for the VM.
+vmdisksize: 15G
+# Developer account (user) used to connect to the VM.
+vmuser: vscdev
+# If this parameter is set, the specified file will be used as a public key to use for SSH connection to VM. If this 
+# parameter is not set or disabled, then a new public key is created and used.
+vmsshpubkey: "~/.ssh/id_rsa.pub"
+# Specifying transfer folders to exchange data between the VM and the host.
+synced_folders:
+    provisioning_folder:
+      host: /Users/markuslohn/Sourcecode/customers/RhB/multipass-java-integration-dev
+      guest: /provisioning
+    sourcecode_folder:
+      host: /Users/markuslohn/Sourcecode/customers/RhB
+      guest: /home/{{vmuser}}/projects
+    maven_repo_folder:
+      host: /Users/markuslohn/.m2
+      guest: /home/{{vmuser}}/.m2

@@ -1,0 +1,80 @@
+---
+# Creates or updates a Multipass VM with the supplied name and other 
+# configuration settings. If the VM already exists it updates the VM.
+# It can be configured to delete an existing VM before creating a new one.
+# 
+# Prerequisites:
+# A SSH keypair that will be used as one option to log into the new VM must exist.
+# A cloud-init configuration file named "cloud-init.yaml" that will be used
+# when creating the new VM must exist.
+#
+# Variables:
+# vmname - Name of the VM that is to be create.
+# vmdeletebeforecreate - Delete an existing VM before create.
+# vmcpus - Number of CPUs used by the VM.
+# vmmemory - Memory used by the VM.
+# vmdisksize - Disk size used by the VM
+# synced_folders - Folders used to sync data between host and guest.
+
+- name: Check existence of VM {{ vmname }}
+  shell: |
+      multipass info {{ vmname }} > /dev/null 2> /dev/null
+      if [ $? -eq 0 ]; then
+         echo true
+      else 
+         echo false
+      fi
+  delegate_to: localhost
+  register: vmexists
+
+- name: Create non-existing VM
+  block:
+    - name: Log VM creation start
+      debug:
+        msg: "About to create VM {{ vmname }}..."
+
+    - name: Delete existing VM
+      shell: |
+        multipass info {{ vmname }} > /dev/null 2> /dev/null
+        if [ $? -eq 0 ]; then
+          multipass delete {{ vmname }}
+          multipass purge
+        fi
+      delegate_to: localhost
+      when: vmdeletebeforecreate is defined and vmdeletebeforecreate
+
+    - name: Create new VM
+      shell: multipass launch --name {{ vmname }} --cloud-init cloud-init.yaml --cpus {{ vmcpus }}  --disk {{ vmdisksize }} --memory {{ vmmemory }}
+      delegate_to: localhost
+
+    - name: Log VM creation completion
+      debug:
+        msg: "Finished creating VM {{ vmname }}."
+  when: not vmexists
+
+- name: Updates existing VM
+  block:
+    - name: Stop VM
+      shell: multipass stop {{ vmname }}
+      delegate_to: localhost
+
+    - name: Updates VM settings
+      shell: |
+        multipass set local.{{ vmname }}.cpus={{ vmcpus }}  
+        multipass set local.{{ vmname }}.disk={{ vmdisksize }}
+        multipass set local.{{ vmname }}.memory={{ vmmemory }}
+      delegate_to: localhost
+  when: vmexists
+
+- name: Configure synced folders between host and {{ vmname }}
+  shell: multipass mount {{ item.value.host }} {{ vmname }}:{{ item.value.guest }}
+  delegate_to: localhost
+  loop: "{{ lookup('dict', synced_folders) }}"
+  ignore_errors: true
+
+- name: Start VM
+  shell: multipass start {{ vmname }}
+  delegate_to: localhost
+
+
+ 

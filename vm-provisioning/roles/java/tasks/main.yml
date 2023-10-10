@@ -1,0 +1,24 @@
+- name: Install OpenJDK 17
+  ansible.builtin.apt:
+    name: "openjdk-17-jdk"
+    state: latest
+- name: Find Java keystores cacerts
+  find:
+      path: /usr/lib/jvm
+      patterns: "cacerts"
+      recurse: yes
+      follow: yes
+  register: keystores_search_result
+#- debug: var=keystores_search_result
+- name: Import SSL certificate, create it if it doesn't exist
+  java_cert:
+      cert_url: qs1.intra.rhb.ch
+      cert_port: 443
+      cert_alias: qs1.intra.rhb.ch
+      keystore_path: "{{ item.path }}"
+      keystore_pass: changeit
+      keystore_create: no
+      state: present
+  with_items: "{{ keystores_search_result.files }}"
+  become: yes
+  when: keystores_search_result.matched > 0

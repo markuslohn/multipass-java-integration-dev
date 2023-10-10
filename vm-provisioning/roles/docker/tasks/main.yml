@@ -1,0 +1,84 @@
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+- name: Autoremove unneeded packages installed as dependencies
+  dnf:
+    autoremove: yes
+
+- name: Create vscdev user
+  ansible.builtin.user:
+    name: vscdev
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: vscdev
+    state: present
+    key: "{{ lookup('file', vagrant_ssh_pub_key) }}"
+- name: Add user vscdev to vagrant group
+  user:
+      name: vscdev
+      groups: vagrant
+      append: yes
+  become: yes    
+
+- name: Install git
+  dnf:
+    name: git
+    state: latest
+- name: Install samba-client
+  dnf:
+    name: samba-client
+    state: latest
+- name: Install dnf-plugins-core
+  dnf:
+    name: dnf-plugins-core
+    state: latest
+- name: Install docker repository
+  command: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+- name: Install docker
+  dnf:
+    name: docker-ce
+    state: latest
+  with_items :
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+- name: Start Docker service
+  service:
+     name: docker
+     state: started
+     enabled: yes
+  become: yes
+- name: Add user vscdev to docker group
+  user:
+      name: vscdev
+      groups: docker
+      append: yes
+  become: yes    
+
+- stat:
+    path: "/usr/local/bin/docker-compose"
+  register: dc_install_dir
+- name: set fact dc_installed
+  set_fact:
+    dc_installed: "{{ dc_install_dir.stat.exists }}"
+- block:
+      - name: Download docker-compose
+        get_url:
+               url: https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64
+               dest: /usr/local/bin/docker-compose
+               mode: +x
+      - name: Creating a symlink for docker-compose
+        ansible.builtin.file:
+            src: "/usr/local/bin/docker-compose"
+            dest: "/usr/bin/docker-compose"
+            state: link
+      - name: Remove file /tmp/docker-compose-linux-x86_64
+        ansible.builtin.file:
+          path: /tmp/docker-compose-linux-x86_64
+          state: absent
+  when: dc_installed == False
+

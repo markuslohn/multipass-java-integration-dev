@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+	<profiles>
+		<profile>
+		      <id>default</id>
+		      <repositories>
+		        <repository>
+		          <id>redhat-ga-all-repository</id>
+		          <name>Red Hat GA (all)</name>
+		          <url>https://maven.repository.redhat.com/ga/</url>
+		          <layout>default</layout>
+		          <releases>
+		            <enabled>true</enabled>
+		            <updatePolicy>never</updatePolicy>
+		          </releases>
+		          <snapshots>
+		            <enabled>false</enabled>
+		            <updatePolicy>never</updatePolicy>
+		          </snapshots>
+		        </repository>
+		      </repositories>
+		      <pluginRepositories>
+		        <pluginRepository>
+		          <id>redhat-ga-all-repository</id>
+		          <name>Red Hat GA repository (all)</name>
+		          <url>http://maven.repository.redhat.com/ga/</url>
+		          <layout>default</layout>
+		          <releases>
+		            <enabled>true</enabled>
+		            <updatePolicy>never</updatePolicy>
+		          </releases>
+		          <snapshots>
+		            <enabled>false</enabled>
+		            <updatePolicy>never</updatePolicy>
+		          </snapshots>
+		        </pluginRepository>
+		      </pluginRepositories>
+		    </profile>
+	</profiles>
+	<activeProfiles>
+		<activeProfile>default</activeProfile>
+	</activeProfiles>
+</settings>

@@ -1,0 +1,8 @@
+---
+- name: Update Multipass VM 
+  hosts: localhost
+  vars_files:
+    - vm-config.yaml
+  tasks:  
+  - name: Update Multipass VM 
+    include_tasks: create-or-update-multipass-vm.yaml
