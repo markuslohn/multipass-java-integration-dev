@@ -4,10 +4,11 @@
   become: yes
   vars:
   vars_files:
-    - ../vm-init/vm-config.yaml
+    - ../vm-config.yaml
 
   roles:
     - common
+    - nodejs
     - java
     - role: maven
       vars: 
@@ -17,6 +18,9 @@
       vars: 
         oc_user: '{{ vmuser }}'
         oc_client_version: 4.13.14
+
+
+
 
 
 

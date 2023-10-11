@@ -41,15 +41,13 @@
           owner: '{{ mvn_user }}'
           state: present
           create: yes
+  
+    - name: Create folder $HOME/.m2
+      file: state=directory path=/home/{{ mvn_user }}/.m2 force=No owner={{ mvn_user }}
 
-# The following lines maybe needed, when not synching the host/.m2 with the guest/.m2 folder.
-#  
-#    - name: Create folder $HOME/.m2
-#      file: state=directory path=/home/{{ mvn_user }}/.m2 force=No owner={{ mvn_user }}
+    - name: Copy settings-security.xml to $HOME/.m2, execute mvn --encrypt masterpassword
+      copy: src=settings-security.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
 
-#    - name: Copy settings-security.xml to $HOME/.m2, execute mvn --encrypt masterpassword
-#      copy: src=settings-security.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
-
-#    - name: Copy settings.xml to $HOME/.m2, configure Artifactory passwords manually
-#      copy: src=settings.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
+    - name: Copy settings.xml to $HOME/.m2, configure Artifactory passwords manually
+      copy: src=settings.xml dest=/home/{{ mvn_user }}/.m2  force=no owner={{ mvn_user }}
   when: mvn_installed == False

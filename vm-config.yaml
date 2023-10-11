@@ -13,14 +13,19 @@ vmuser: vscdev
 # If this parameter is set, the specified file will be used as a public key to use for SSH connection to VM. If this 
 # parameter is not set or disabled, then a new public key is created and used.
 vmsshpubkey: "~/.ssh/id_rsa.pub"
+# default mountpoint for provisioning scripts
+vmdefaultmount: multipass
+# default command for provision the VM
+vmprovisioncmd: ansible-playbook /{{ vmdefaultmount }}/vm-provisioning/playbook.yml
 # Specifying transfer folders to exchange data between the VM and the host.
 synced_folders:
     provisioning_folder:
-      host: /Users/markuslohn/Sourcecode/customers/RhB/multipass-java-integration-dev
-      guest: /provisioning
+      host: '{{ playbook_dir }}'
+      guest: /{{ vmdefaultmount }}
     sourcecode_folder:
       host: /Users/markuslohn/Sourcecode/customers/RhB
       guest: /home/{{vmuser}}/projects
-    maven_repo_folder:
-      host: /Users/markuslohn/.m2
-      guest: /home/{{vmuser}}/.m2
+# Currently the Maven build don't run, when sharing a Maven repository between host and guest.
+#    maven_repo_folder:
+#      host: /Users/markuslohn/.m2
+#      guest: /home/{{vmuser}}/.m2

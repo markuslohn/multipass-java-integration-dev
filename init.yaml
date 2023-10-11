@@ -1,0 +1,16 @@
+---
+- name: Create or update VM 
+  hosts: localhost
+  vars_files:
+    - vm-config.yaml
+  tasks:
+  
+  - name: Create cloud-init file
+    include_tasks: ./vm-init/create-cloudinit.yaml
+
+  - name: Create or update Multipass VM 
+    include_tasks: ./vm-init/create-or-update-multipass-vm.yaml
+ 
+  - name: Provision Multipass VM 
+    include_tasks: ./vm-init/provision-multipass-vm.yaml
+ 

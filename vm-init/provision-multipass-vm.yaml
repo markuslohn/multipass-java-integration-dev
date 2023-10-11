@@ -1,0 +1,33 @@
+---
+# Executes a script (typically an Ansible playbook) to setup
+# the VM.
+# 
+# Variables:
+# vmname - Name of the VM that is to be create.
+# vmprovisioncmd - Execution command to provision the VM.
+
+- name: Check existence of {{ vmname }} VM 
+  shell: |
+      multipass info {{ vmname }} > /dev/null 2> /dev/null
+      if [ $? -eq 0 ]; then
+         echo yes
+      else 
+         echo no
+      fi
+  delegate_to: localhost
+  register: vminfo
+- name: set fact vmexists
+  set_fact:
+    vmexists: "{{ vminfo.stdout }}"
+
+- name: Provision VM {{ vmname }}
+  block:
+    - name: Execute provision script within VM 
+      shell: multipass exec {{ vmname }} {{ vmprovisioncmd }}
+      delegate_to: localhost
+      register: provision_result  
+
+    - name: Print provision execution result
+      debug:
+        msg: "{{ provision_result.stdout_lines }}"
+  when: vmexists

@@ -4,5 +4,5 @@
   vars_files:
     - vm-config.yaml
   tasks:  
-  - name: Update Multipass VM 
-    include_tasks: create-or-update-multipass-vm.yaml
+  - name: Provision Multipass VM  
+    include_tasks: ./vm-init/provision-multipass-vm.yaml

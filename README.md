@@ -1,5 +1,5 @@
 # multipass-java-integration-dev
-A java based development environment using multipass.io running on a MacOS M2 system.
+A java based development environment using multipass.io running on a MacOS M2 system. The way of operation is based on the approach of Vagrant+VirtualBox.
 
 ![](./assets/multipass-macos-setup.png)
 
@@ -8,6 +8,7 @@ It contains the following tools
 - Java 17 
 - Maven
 - OpenShift Client
+- NodeJS and npm
 
 ## Setup
 
@@ -20,43 +21,31 @@ In order to install and use the development environment, the following requireme
 - Install and configure [Ansible](https://www.ansible.com/)
 
 
-### Create VM
+### Create or update VM
 
 1. Prepare VM configuration
 
-The configuration settings are made in the file ```<project-root>/vm-init/vm-config.yaml```. All settings are explained in this file.
+The configuration settings are made in the file ```<project-root>/vm-config.yaml```. All settings are explained in this file.
 
 
-2. In order to setup a new multipass VM navigate to ```<project-root>/vm-init``` folder and run the following command:
-
-```bash
-ansible-playbook create-vm-playbook.xml
-```
-
-3. Exceute Ansible script for provisioning inside VM. See below for further details.
-
-
-### Update VM
-
-If an adjustment of the VM configuration is required, then the following steps must be performed.
-
-1. Prepare VM configuration
-
-Change the settings in the file ```<project-root>/vm-init/vm-config.yaml```. All settings are explained in this file.
-
-
-2. Navigate to ```<project-root>/vm-init``` folder and run the following command:
+2. In order to setup a new multipass VM navigate to ```<project-root>``` folder and run the following command:
 
 ```bash
-ansible-playbook update-vm-playbook.xml
+ansible-playbook init.yaml
 ```
-
-**Note:** The VM will be automatically stopped and started again, when running this command!
 
 
 ### Provisioning
 
-Provisioning of tools for development is also controlled via Ansible. The Ansible roles to be executed can be changed under afterwards. The following steps are required to execute the provisioning:
+Provisioning can be performed both by the host and directly within the VM. Provisioning is also performed via Ansible.
+
+1. In order to provision a multipass VM navigate to ```<project-root>``` folder and run the following command:
+
+```bash
+ansible-playbook provision.yaml
+```
+
+Alternatively, provisioning can also be performed within the VM using Ansible. The following steps are required for this:
 
 1. Modify Ansible roles in folder ```<project-root>/vm-provisioning```
 
@@ -67,20 +56,20 @@ ssh <vmuser>@IP-Address
 ``` 
 
 **Notes:**  
-- vmuser is configured in ```<project-root>/vm-init/vm-config.yaml```.
+- vmuser is configured in ```<project-root>/vm-config.yaml```.
 - IP-Address can be obtain using ```multipass info <vmname>``` or ```multipass list```.
 
-3. Navigate to ```/provisioning/vm-provisioning```
+3. Navigate to ```/multipass/vm-provisioning```
 
 4. Exceute the following command:
 
 ```bash
-ansible-playbook provision-playbook.xml
+ansible-playbook playbook.yaml
 ```
 
 ## Insights
 
-The creation of a VM is done in 4 steps. Basically the steps can be influenced by configuration settings in the file ```<project-root>/vm-init/vm-config.yaml```. The creation is controlled by Ansible.
+The creation of a VM is done in 4 steps. Basically the steps can be influenced by configuration settings in the file ```<project-root>/vm-config.yaml```. The creation is controlled by Ansible.
 
 In step 1 a cloud-init.yaml is created. The file contains the user and public keys and defines basic software that should be installed automatically when the VM is created.
 
@@ -90,6 +79,18 @@ In step 3, different mounts are defined in Multipass.io to exchange data between
 
 As the 4th and last step, an Ansible script can be executed within the VM to install further tools and to adapt the VM to one's own needs. The "Provisioning" script can be executed again at any time. Steps 1 - 3 are actually only for creating the VM.
 
+
+## Issues
+
+### Maven repository can't be shared via a mount
+
+When integrating Maven repository via a mount into the VM, no build is running correctly. The following error is shown:
+
+```
+[ERROR] Failed to execute goal io.quarkus.platform:quarkus-maven-plugin:2.16.7.Final:generate-code (default) on project messwerte-from-tredis-to-sap: Quarkus code generation phase has failed: java.io.IOException: Failed to create a new filesystem for /home/ubuntu/.m2/repository/io/quarkus/quarkus-apache-httpclient/2.16.7.Final/quarkus-apache-httpclient-2.16.7.Final.jar: /home/ubuntu/.m2/repository/io/quarkus/quarkus-apache-httpclient/2.16.7.Final/quarkus-apache-httpclient-2.16.7.Final.jar: Operation not permitted -> [Help 1]
+```
+
+I played with security options in the multipass mount command and also ensured that multipass has full access to my local harddrive. However until now it was not possible to avoid this error when running a Maven build. So I decided to unmount the Maven repository.
 
 
 
