@@ -1,0 +1,37 @@
+
+- name: Remove unofficial packages for Docker Engine
+  ansible.builtin.apt:
+    pkg: 
+    - docker.io
+    - docker-doc
+    - docker-compose
+    - podman-docker
+    - containerd
+    state: absent
+
+- name: Add Docker's official GPG Key
+  apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+- name: Add the repository to Apt sources
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install the latest Docker Engine
+  ansible.builtin.apt:
+    pkg: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
+    state: present
+
+- name: Add user {{ docker_user }} to docker group
+  user:
+      name: '{{ docker_user }}'
+      groups: docker
+      append: yes
+  become: yes   

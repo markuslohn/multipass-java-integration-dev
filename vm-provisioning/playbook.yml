@@ -9,6 +9,9 @@
   roles:
     - common
     - nodejs
+    - role: docker
+      vars:
+        docker_user: '{{ vmuser }}'
     - java
     - role: maven
       vars: 
@@ -19,10 +22,3 @@
         oc_user: '{{ vmuser }}'
         oc_client_version: 4.13.14
 
-
-
-
-
-
-
-    
