@@ -17,7 +17,7 @@
     - role: oc
       vars: 
         oc_user: '{{ vmuser }}'
-        oc_client_version: 4.13.14
+        oc_client_version: 4.11.52
 
 
 
